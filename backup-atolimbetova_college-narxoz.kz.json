@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "tx": [
+    {
+      "id": 1792875380716,
+      "type": "income",
+      "category": "salary",
+      "amount": 350000,
+      "date": "2026-10-24",
+      "note": ""
+    },
+    {
+      "id": 1792875393254,
+      "type": "income",
+      "category": "side",
+      "amount": 12000,
+      "date": "2026-10-24",
+      "note": ""
+    },
+    {
+      "id": 1792875403987,
+      "type": "expense",
+      "category": "food",
+      "amount": 50000,
+      "date": "2026-10-24",
+      "note": ""
+    },
+    {
+      "id": 1792875412396,
+      "type": "expense",
+      "category": "transport",
+      "amount": 25000,
+      "date": "2026-10-24",
+      "note": ""
+    },
+    {
+      "id": 1792875427899,
+      "type": "expense",
+      "category": "home",
+      "amount": 75000,
+      "date": "2026-10-24",
+      "note": ""
+    },
+    {
+      "id": 1792875439918,
+      "type": "expense",
+      "category": "shop",
+      "amount": 100000,
+      "date": "2026-10-24",
+      "note": ""
+    },
+    {
+      "id": 1792875592522,
+      "type": "expense",
+      "category": "other",
+      "amount": 20000,
+      "date": "2026-10-24",
+      "note": "на машину"
+    },
+    {
+      "id": 1792875592523,
+      "type": "expense",
+      "category": "food",
+      "amount": 75000,
+      "date": "2026-10-24",
+      "note": "квартира"
+    }
+  ],
+  "bud": {
+    "food": 65000,
+    "fun": 23000,
+    "health": 10000,
+    "home": 75000,
+    "other": 10000,
+    "shop": 91000,
+    "transport": 50000
+  },
+  "goals": [
+    {
+      "id": 1792875553347,
+      "name": "машина",
+      "target": 7000000,
+      "saved": 20000
+    }
+  ],
+  "rec": [
+    {
+      "id": 1792875772448,
+      "type": "expense",
+      "category": "food",
+      "amount": 75000,
+      "note": "квартира",
+      "every": "monthly",
+      "next": "2026-11-24"
+    }
+  ]
+}

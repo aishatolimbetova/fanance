@@ -1,0 +1,9 @@
+{
+  "name": "tarvriqo",
+  "version": "2.1.0",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

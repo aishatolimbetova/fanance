@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarvriqo</title>
+<meta name="theme-color" content="#ffffff">
+<script>try{var __t=JSON.parse(localStorage.getItem("ft.theme"));document.documentElement.dataset.theme=__t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<!-- Заранее открываем соединения со всеми внешними серверами -->
+<link rel="preconnect" href="https://tlfprpskqvhgnuwhhjqt.supabase.co">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<!-- Шрифты подключаются без блокировки: пока они грузятся, текст виден системным шрифтом -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"></noscript>
+</head>
+<body>
+
+<!-- Экран входа: лендинг как у Wise. Скрыт, пока Supabase не сообщит, есть ли сохранённая сессия -->
+<div class="auth" id="auth" hidden>
+  <div class="land-nav">
+    <span class="brand"><span class="brand-mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></span><span data-i="app"></span></span>
+    <div class="tools">
+      <select id="lang2" class="ctl" aria-label="Language"><option value="ru">RU</option><option value="kk">KK</option><option value="en">EN</option></select>
+      <button id="theme2" class="ctl ico" type="button"></button>
+    </div>
+  </div>
+  <main class="land">
+    <h1 class="land-title" data-i="l_title"></h1>
+    <p class="land-sub" data-i="l_sub"></p>
+    <div class="land-cta">
+      <button class="btn pri" id="aopen" type="button" data-i="login"></button>
+      <button class="tlink" id="aopen2" type="button" data-i="reg"></button>
+    </div>
+    <div class="auth-in" id="aform" hidden>
+      <label class="fld"><span data-i="email"></span><input id="aemail" type="email" autocomplete="email" spellcheck="false"></label>
+      <label class="fld"><span data-i="pass"></span>
+        <span class="pw">
+          <input id="apass" type="password" autocomplete="current-password">
+          <button id="eye" class="eye" type="button" aria-pressed="false" aria-label="Показать пароль">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </span>
+      </label>
+      <p class="err" id="aerr" hidden></p>
+      <div class="acts"><button class="btn pri" id="alogin" type="button" data-i="login"></button><button class="btn" id="areg" type="button" data-i="reg"></button></div>
+    </div>
+    <div class="globe-wrap" id="gwrap">
+      <canvas id="scene" class="scene" aria-hidden="true"></canvas>
+      <canvas id="planet" class="scene" aria-hidden="true"></canvas>
+      <canvas id="scene2" class="scene" aria-hidden="true"></canvas>
+      <div class="fx-layer" aria-hidden="true">
+        <div class="fx fx-bk"><div class="fx-in"><div class="bk">
+          <div class="bk-chip"></div>
+          <div class="bk-row"><span>•••• 4821</span><span class="bk-pay"><i></i><i></i></span></div>
+        </div></div></div>
+        <div class="fx fx-st"><div class="fx-in"><div class="st-card">
+          <div class="st-top"><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>+12,4%</div>
+          <div class="st-bars"><i style="--h:38%;--n:0"></i><i style="--h:52%;--n:1"></i><i style="--h:44%;--n:2"></i><i style="--h:66%;--n:3"></i><i style="--h:82%;--n:4"></i><i style="--h:100%;--n:5"></i></div>
+        </div></div></div>
+        <div class="fx fx-nt"><div class="fx-in"><div class="nt"><span class="nt-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span><b id="ntv">+45 000 ₸</b></div></div></div>
+        <div class="fx fx-rg"><div class="fx-in"><div class="rg"><svg viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="18" pathLength="100"/><circle class="fg" cx="22" cy="22" r="18" pathLength="100"/></svg><b>72%</b></div></div></div>
+      </div>
+      
+    </div>
+    <section class="feats">
+      <div class="feat rv"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18M8 15h3"/></svg><h3 data-i="f1t"></h3><p data-i="f1d"></p></div>
+      <div class="feat rv"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/><path d="M3 3l18 18"/></svg><h3 data-i="f2t"></h3><p data-i="f2d"></p></div>
+      <div class="feat rv"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l4-5 3 3 5-7"/></svg><h3 data-i="f3t"></h3><p data-i="f3d"></p></div>
+    </section>
+    <section class="dcard rv">
+      <h2 data-i="l_card"></h2>
+      <p data-i="l_card_d"></p>
+      <button class="btn pri" id="aopen3" type="button" data-i="login"></button>
+    </section>
+    </main>
+</div>
+
+<header class="nav">
+  <div class="nav-in">
+    <span class="brand"><span class="brand-mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></span><span data-i="app"></span></span>
+    <nav class="tabs" aria-label="Разделы">
+      <button type="button" data-v="dash" data-i="n_dash"></button>
+      <button type="button" data-v="ops" data-i="n_ops"></button>
+      <button type="button" data-v="bud" data-i="n_bud"></button>
+      <button type="button" data-v="goals" data-i="n_goals"></button>
+      <button type="button" data-v="rec" data-i="n_rec"></button>
+      <button type="button" data-v="scan" data-i="n_scan"></button>
+      <button type="button" data-v="rep" data-i="n_rep"></button>
+    </nav>
+    <div class="tools">
+      <button id="supbtn" class="ctl sup-btn" type="button" aria-haspopup="dialog" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 1.9-2.8 2.4-2.8 4.2M12 17.6h.01"/></svg><span data-i="sup"></span></button>
+      <select id="lang" class="ctl" aria-label="Language"><option value="ru">RU</option><option value="kk">KK</option><option value="en">EN</option></select>
+      <button id="theme" class="ctl ico" type="button"></button>
+      <button id="out" class="ctl" type="button" data-i="out"></button>
+      <button id="me" class="me" type="button" data-v="prof" aria-label="Профиль"><span class="av sm" id="meav"></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="head">
+    <h1 class="title" id="vtitle"></h1>
+    <div class="period">
+      <button class="ctl" id="prev" type="button" aria-label="←">←</button>
+      <b id="mname"></b>
+      <button class="ctl" id="next" type="button" aria-label="→">→</button>
+    </div>
+  </div>
+
+  <!-- Обзор -->
+  <section class="view" id="v-dash">
+    <p class="hello" id="hello"></p>
+    <div id="alerts"></div>
+    <div class="dash-top">
+      <article class="hero" id="hero">
+        <div class="hero-top"><span class="lbl" data-i="bal"></span><span class="tag" id="tkm"></span></div>
+        <strong class="display" id="bal"></strong>
+        <div class="hero-fl">
+          <div><span class="lbl" data-i="inc"></span><b id="inc"></b></div>
+          <div><span class="lbl" data-i="exp"></span><b id="exp"></b></div>
+          <div><span class="lbl" data-i="p_ops"></span><b id="tkno"></b></div>
+        </div>
+        <p class="st" id="st"></p>
+      </article>
+
+      <form class="panel" id="form" novalidate>
+        <h2 class="lbl" id="ftitle"></h2>
+        <div class="seg">
+          <button type="button" id="tE" data-i="t_exp"></button>
+          <button type="button" id="tI" data-i="t_inc"></button>
+        </div>
+        <label class="fld"><span data-i="amount"></span><input class="amt" id="amount" inputmode="decimal" autocomplete="off" placeholder="0"></label>
+        <div class="r2">
+          <label class="fld"><span data-i="cat"></span><select id="cat"></select></label>
+          <label class="fld"><span data-i="date"></span><input id="date" type="date"></label>
+        </div>
+        <label class="fld"><span data-i="note"></span><input id="note" data-p="note_ph" maxlength="120" autocomplete="off"></label>
+        <p class="err" id="err" hidden></p>
+        <div class="acts"><button class="btn pri" id="sub" type="submit"></button><button class="btn" id="cancel" type="button" data-i="cancel" hidden></button></div>
+      </form>
+    </div>
+
+    <div class="dash-grid">
+      <section class="blk">
+        <h2 class="lbl"><span data-i="trend"></span></h2>
+        <div class="chart" id="chart"></div>
+        <div class="lg"><span><i class="li"></i><span data-i="inc"></span></span><span><i class="le"></i><span data-i="exp"></span></span></div>
+      </section>
+      <section class="blk">
+        <h2 class="lbl"><span data-i="bycat"></span></h2>
+        <div class="cats"><div class="donut" id="donut"><span id="dtot"></span></div><ul class="legend" id="legend"></ul></div>
+      </section>
+      <section class="blk">
+        <h2 class="lbl"><span data-i="ins"></span></h2>
+        <ul class="ins" id="ins"></ul>
+        <h2 class="lbl sub"><span data-i="f_title"></span></h2>
+        <div id="fc"></div>
+      </section>
+      <section class="blk">
+        <h2 class="lbl"><span data-i="recent"></span></h2>
+        <div id="recent"></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- Операции -->
+  <section class="view" id="v-ops">
+    <div class="bar">
+      <input id="q" type="search" data-p="search" autocomplete="off">
+      <select id="ft" aria-label="Фильтр"><option value="all" data-i="all"></option><option value="expense" data-i="t_exp"></option><option value="income" data-i="t_inc"></option></select>
+      <button class="btn sm-btn" id="csv" type="button" data-i="export"></button>
+      <button class="btn sm-btn" id="bk" type="button" data-i="bk"></button>
+      <button class="btn sm-btn" id="imp" type="button" data-i="imp"></button>
+      <input id="file" type="file" accept="application/json,.json" hidden>
+    </div>
+    <div id="all"></div>
+  </section>
+
+  <!-- Бюджет -->
+  <section class="view" id="v-bud">
+    <p class="hint" data-i="hint"></p>
+    <div class="bgrid" id="bgrid"></div>
+  </section>
+
+  <!-- Цели -->
+  <section class="view" id="v-goals">
+    <div class="split">
+      <div class="panel">
+        <h2 class="lbl" data-i="g_add"></h2>
+        <label class="fld"><span data-i="g_name"></span><input id="gname" maxlength="60" autocomplete="off"></label>
+        <label class="fld"><span data-i="g_target"></span><input id="gtar" inputmode="decimal" autocomplete="off" placeholder="0"></label>
+        <p class="err" id="gerr" hidden></p>
+        <div class="acts"><button class="btn pri" id="gadd" type="button" data-i="g_add"></button></div>
+      </div>
+      <div>
+        <h2 class="lbl" data-i="g_title"></h2>
+        <div class="glist" id="glist"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Регулярные платежи -->
+  <section class="view" id="v-rec">
+    <div class="split">
+      <div class="panel">
+        <h2 class="lbl" data-i="r_add"></h2>
+        <div class="r2">
+          <label class="fld"><span data-i="typ"></span><select id="rtype"><option value="expense" data-i="t_exp"></option><option value="income" data-i="t_inc"></option></select></label>
+          <label class="fld"><span data-i="cat"></span><select id="rcat"></select></label>
+        </div>
+        <label class="fld"><span data-i="amount"></span><input id="ramt" inputmode="decimal" autocomplete="off" placeholder="0"></label>
+        <label class="fld"><span data-i="note"></span><input id="rnote" maxlength="120" autocomplete="off"></label>
+        <div class="r2">
+          <label class="fld"><span data-i="r_every"></span><select id="revery"><option value="monthly" data-i="r_m"></option><option value="weekly" data-i="r_w"></option></select></label>
+          <label class="fld"><span data-i="r_start"></span><input id="rdate" type="date"></label>
+        </div>
+        <p class="err" id="rerr" hidden></p>
+        <div class="acts"><button class="btn pri" id="radd" type="button" data-i="r_add"></button></div>
+      </div>
+      <div>
+        <h2 class="lbl" data-i="r_title"></h2>
+        <p class="rtot" id="rtot"></p>
+        <div id="rlist"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Сканер чеков -->
+  <section class="view" id="v-scan">
+    <p class="hint" data-i="sc_lead"></p>
+    <div class="split">
+      <div class="panel" id="sc-in">
+        <div class="drop" id="sc-drop" role="button" tabindex="0">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>
+          <b data-i="sc_drop"></b>
+          <span class="sm" data-i="sc_tip"></span>
+        </div>
+        <div class="acts">
+          <button class="btn pri" id="sc-pick" type="button" data-i="sc_pick"></button>
+          <button class="btn" id="sc-cam" type="button" data-i="sc_cam"></button>
+        </div>
+        <input type="file" id="sc-file" accept="image/*" hidden>
+        <input type="file" id="sc-cfile" accept="image/*" capture="environment" hidden>
+        <div class="sc-prev" id="sc-prev" hidden>
+          <img id="sc-img" alt="">
+          <div class="trk" id="sc-prog" hidden><i id="sc-bar" style="width:0"></i></div>
+          <p class="sm" id="sc-status" aria-live="polite"></p>
+        </div>
+        <p class="sm" data-i="sc_priv"></p>
+      </div>
+
+      <div class="panel" id="sc-out">
+        <h2 class="lbl" data-i="sc_res"></h2>
+        <p class="empty" id="sc-empty" data-i="sc_empty"></p>
+        <div class="sc-form" id="sc-form" hidden>
+          <label class="fld"><span data-i="amount"></span><input class="amt" id="sc-amt" inputmode="decimal" autocomplete="off" placeholder="0"></label>
+          <div class="r2">
+            <label class="fld"><span data-i="date"></span><input id="sc-date" type="date"></label>
+            <label class="fld"><span data-i="cat"></span><select id="sc-cat"></select></label>
+          </div>
+          <label class="fld"><span data-i="sc_merch"></span><input id="sc-merch" maxlength="60" autocomplete="off"></label>
+          <div class="fld"><span data-i="sc_items"></span>
+            <div class="sc-items" id="sc-items"></div>
+            <div class="sc-sum sm" id="sc-sum"></div>
+            <div><button class="btn sm-btn" id="sc-add" type="button" data-i="sc_iadd"></button></div>
+          </div>
+          <p class="err" id="sc-err" hidden></p>
+          <div class="acts"><button class="btn pri" id="sc-save" type="button" data-i="sc_save"></button><button class="btn" id="sc-reset" type="button" data-i="sc_new"></button></div>
+          <details class="sc-raw"><summary data-i="sc_raw"></summary><pre id="sc-raw"></pre></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Отчёт -->
+  <section class="view" id="v-rep">
+    <div class="bar noprint"><button class="btn sm-btn" id="pdf" type="button" data-i="rp_pdf"></button></div>
+    <div id="rep"></div>
+  </section>
+
+  <!-- Профиль -->
+  <section class="view" id="v-prof">
+    <div class="prof-top">
+      <article class="hero prof-card">
+        <span class="av-wrap"><span class="av big" id="pav"></span><button type="button" class="av-cam" id="pcam" aria-label="Фото"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></button></span>
+        <div class="pc-body">
+          <h2 class="pname" id="pname"></h2>
+          <p class="pmail" id="pmail"></p>
+          <div class="tags" id="ptags"></div>
+        </div>
+      </article>
+      <article class="panel score" id="pscore"></article>
+    </div>
+
+    <div class="kp" id="pstats"></div>
+
+    <div class="split">
+      <form class="panel" id="pform" novalidate>
+        <h2 class="lbl" data-i="p_edit"></h2>
+        <label class="fld"><span data-i="p_name"></span><input id="pn" maxlength="40" autocomplete="name" data-p="p_name_ph"></label>
+        <div class="r2">
+          <label class="fld"><span data-i="p_city"></span><input id="pc" maxlength="40" autocomplete="address-level2"></label>
+          <label class="fld"><span data-i="p_job"></span><input id="pj" maxlength="40" autocomplete="organization-title"></label>
+        </div>
+        <label class="fld"><span data-i="p_goal"></span><input id="pg" inputmode="decimal" autocomplete="off" placeholder="0"></label>
+        <div class="fld"><span data-i="p_color"></span>
+          <div class="swatches" id="psw">
+            <button type="button" class="av sw-lime" data-av="lime" aria-label="lime"></button>
+            <button type="button" class="av sw-mint" data-av="mint" aria-label="mint"></button>
+            <button type="button" class="av sw-blue" data-av="blue" aria-label="blue"></button>
+            <button type="button" class="av sw-spruce" data-av="spruce" aria-label="spruce"></button>
+          </div>
+        </div>
+        <div class="fld"><span data-i="p_photo"></span>
+          <div class="photo-row">
+            <button type="button" class="btn" id="pupl" data-i="p_photo_up"></button>
+            <button type="button" class="btn" id="pdel" data-i="p_photo_del"></button>
+          </div>
+          <span class="sm" data-i="p_photo_hint"></span>
+          <input type="file" id="pfile" accept="image/*" hidden>
+        </div>
+        <div class="acts"><button class="btn pri" type="submit" data-i="save"></button></div>
+      </form>
+
+      <div class="prof-side">
+        <section>
+          <h2 class="lbl"><span data-i="ac_title"></span><span class="cnt" id="pcnt"></span></h2>
+          <div class="ach" id="pach"></div>
+        </section>
+        <section class="panel">
+          <h2 class="lbl" data-i="p_set"></h2>
+          <div class="fld"><span data-i="theme"></span>
+            <div class="seg">
+              <button type="button" data-th="light" data-i="th_l"></button>
+              <button type="button" data-th="dark" data-i="th_d"></button>
+            </div>
+          </div>
+          <div class="fld"><span data-i="p_lang"></span>
+            <div class="seg">
+              <button type="button" data-lg="ru">Русский</button>
+              <button type="button" data-lg="kk">Қазақша</button>
+              <button type="button" data-lg="en">English</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span class="foot-l" data-i="app"></span>
+  <span class="sync" id="sync" aria-live="polite"></span>
+  <span class="coord">43.2380° N · 76.8890° E</span>
+</footer>
+
+<div class="toast" id="toast" role="status" hidden><span id="tmsg"></span><button id="undo" type="button" data-i="undo"></button></div>
+
+<!-- defer: скрипты качаются параллельно и выполняются по порядку, когда разметка готова -->
+<script defer src="vendor/supabase.js"></script><!-- @supabase/supabase-js 2.117.2, лежит в проекте -->
+
+<script defer src="config.js"></script>
+<script defer src="i18n.js"></script>
+<script defer src="store.js"></script>
+<script defer src="app.js"></script>
+<script defer src="receipt.js"></script>
+<script defer src="scanner.js"></script>
+<script defer src="scene.js"></script>
+<script defer src="support.js"></script>
+</body>
+</html>

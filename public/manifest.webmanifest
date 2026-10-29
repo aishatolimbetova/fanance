@@ -1,0 +1,9 @@
+{
+  "name": "Tarvriqo",
+  "short_name": "Tarvriqo",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#163300",
+  "theme_color": "#163300",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
